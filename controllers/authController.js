@@ -188,3 +188,37 @@ export const refreshAccessToken = async (req, res) => {
     res.status(500).json({ message: 'Sunucu hatası', error: error.message });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    // 1. Cookie'den refresh token'ı al
+    const token = req.cookies.refreshToken;
+
+    // 2. Cookie yoksa zaten logout olmuş
+    if (!token) {
+      return res.status(200).json({ 
+        message: 'Zaten çıkış yapılmış' 
+      });
+    }
+
+    // 3. DB'de bu token'a sahip kullanıcıyı bul ve temizle
+    await User.findOneAndUpdate(
+      { refreshToken: token },
+      { refreshToken: null }
+    ).select('+refreshToken');
+
+    // 4. Cookie'yi temizle
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+
+    res.status(200).json({ 
+      message: 'Çıkış başarılı' 
+    });
+
+  } catch (error) {
+    res.status(500).json({ message: 'Sunucu hatası', error: error.message });
+  }
+};
