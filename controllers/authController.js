@@ -1,6 +1,6 @@
 import User from "../models/User.js";
 import generateTokens from "../config/generateTokens.js";
-
+import jwt from 'jsonwebtoken';
 // REGISTER
 export const register = async (req, res) => {
   try {
@@ -125,6 +125,66 @@ export const getProfile = async (req, res) => {
       user: req.user,
     });
   } catch (error) {
+    res.status(500).json({ message: 'Sunucu hatası', error: error.message });
+  }
+};
+
+export const refreshAccessToken = async (req, res) => {
+  try {
+    // 1. Cookie'den refresh token'ı al
+    const token = req.cookies.refreshToken;
+
+    if (!token) {
+      return res.status(401).json({ 
+        message: 'Refresh token bulunamadı' 
+      });
+    }
+
+    // 2. Token'ı doğrula
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
+
+    // 3. Kullanıcıyı bul — refreshToken'ı da getir
+    const user = await User.findById(decoded.id).select('+refreshToken');
+    if (!user) {
+      return res.status(401).json({ 
+        message: 'Kullanıcı bulunamadı' 
+      });
+    }
+
+    // 4. DB'deki token ile gelen token aynı mı?
+    if (user.refreshToken !== token) {
+      return res.status(401).json({ 
+        message: 'Geçersiz refresh token' 
+      });
+    }
+
+    // 5. Yeni tokenları üret — Token Rotation!
+    const { accessToken, refreshToken: newRefreshToken } = generateTokens(user._id);
+
+    // 6. Yeni refresh token'ı DB'ye kaydet
+    user.refreshToken = newRefreshToken;
+    await user.save();
+
+    // 7. Yeni refresh token'ı cookie'ye koy
+    res.cookie('refreshToken', newRefreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    // 8. Yeni access token'ı dön
+    res.status(200).json({
+      message: 'Token yenilendi',
+      accessToken,
+    });
+
+  } catch (error) {
+    if (error.name === 'TokenExpiredError') {
+      return res.status(401).json({ 
+        message: 'Refresh token süresi doldu, lütfen tekrar giriş yapın' 
+      });
+    }
     res.status(500).json({ message: 'Sunucu hatası', error: error.message });
   }
 };
