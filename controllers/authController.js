@@ -115,3 +115,16 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Sunucu hatası', error: error.message });
   }
 };
+
+// GET PROFILE (Protected)
+// ─────────────────────────────────────
+export const getProfile = async (req, res) => {
+  try {
+    res.status(200).json({
+      message: 'Profile erişim başarılı',
+      user: req.user,
+    });
+  } catch (error) {
+    res.status(500).json({ message: 'Sunucu hatası', error: error.message });
+  }
+};
