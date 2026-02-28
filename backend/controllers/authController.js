@@ -2,6 +2,9 @@ import User from "../models/User.js";
 import AppError from '../utils/AppError.js';
 import generateTokens from "../config/generateTokens.js";
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
+import sendEmail from '../config/sendEmail.js';
+import { verificationEmailTemplate } from '../config/emailTemplates.js';
 
 // ─────────────────────────────────────
 // REGISTER
@@ -20,10 +23,23 @@ export const register = async (req, res, next) => {
     }
 
     const user = await User.create({ username, email, password });
-    const { accessToken, refreshToken } = generateTokens(user._id);
 
+    // Email doğrulama token'ı üret
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    user.emailVerificationToken = verificationToken;
+    user.emailVerificationExpire = Date.now() + 24 * 60 * 60 * 1000; // 24 saat
+
+    const { accessToken, refreshToken } = generateTokens(user._id);
     user.refreshToken = refreshToken;
     await user.save();
+
+    // Doğrulama emaili gönder
+    const verificationUrl = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
+    await sendEmail({
+      to: user.email,
+      subject: 'Hesabınızı Doğrulayın',
+      html: verificationEmailTemplate(user.username, verificationUrl),
+    });
 
     res.cookie('refreshToken', refreshToken, {
       httpOnly: true,
@@ -33,12 +49,13 @@ export const register = async (req, res, next) => {
     });
 
     res.status(201).json({
-      message: 'Kayıt başarılı',
+      message: 'Kayıt başarılı, lütfen emailinizi doğrulayın',
       accessToken,
       user: {
         id: user._id,
         username: user.username,
         email: user.email,
+        isEmailVerified: user.isEmailVerified,
       },
     });
 
@@ -178,6 +195,36 @@ export const logout = async (req, res, next) => {
 
     res.status(200).json({
       message: 'Çıkış başarılı'
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const verifyEmail = async (req, res, next) => {
+  try {
+    const { token } = req.params;
+
+    // Token ile kullanıcıyı bul
+    const user = await User.findOne({
+      emailVerificationToken: token,
+      emailVerificationExpire: { $gt: Date.now() }, // süresi dolmamış mı?
+    }).select('+emailVerificationToken +emailVerificationExpire');
+
+    if (!user) {
+      return next(new AppError('Geçersiz veya süresi dolmuş doğrulama linki', 400));
+    }
+
+    // Hesabı aktif et, token'ları temizle
+    user.isEmailVerified = true;
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpire = undefined;
+    await user.save();
+
+    res.status(200).json({
+      success: true,
+      message: 'Email başarıyla doğrulandı',
     });
 
   } catch (error) {
