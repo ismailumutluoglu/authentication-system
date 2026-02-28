@@ -499,3 +499,77 @@
 {"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/89f4c4ad584e31baff59b2fcf8a6d90306cbf7a1471c3abf8a24203260f68d47 \u001b[32m200\u001b[0m 10.397 ms - 59\u001b[0m","timestamp":"2026-02-28T14:12:56.306Z"}
 {"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 139.459 ms - 356\u001b[0m","timestamp":"2026-02-28T14:13:03.322Z"}
 {"level":"info","message":"\u001b[0mPOST /api/auth/logout \u001b[32m200\u001b[0m 4.718 ms - 35\u001b[0m","timestamp":"2026-02-28T14:13:04.625Z"}
+{"level":"info","message":"Sunucu 5000 portunda çalışıyor","timestamp":"2026-02-28T14:36:56.199Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.301Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 4.898 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.305Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.307Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.972 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.307Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.338Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 1.536 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.339Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.340Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.795 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.341Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.342Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.700 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.343Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.344Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.645 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.345Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.347Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.734 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.348Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.349Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.591 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.349Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.351Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.525 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.351Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.352Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.568 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.353Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.354Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.798 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.355Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.355Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.429 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.356Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.357Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.508 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.357Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.358Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.374 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.358Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.360Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.763 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.361Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.362Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.482 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.362Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.363Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.552 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.363Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.364Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.831 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.365Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.367Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.858 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.367Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T14:36:59.368Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.600 ms - 55\u001b[0m","timestamp":"2026-02-28T14:36:59.369Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.428 ms - 96\u001b[0m","timestamp":"2026-02-28T14:36:59.371Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.435 ms - 96\u001b[0m","timestamp":"2026-02-28T14:36:59.372Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.719 ms - 96\u001b[0m","timestamp":"2026-02-28T14:36:59.521Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.261 ms - 96\u001b[0m","timestamp":"2026-02-28T14:36:59.522Z"}
+{"level":"warn","message":"Email veya şifre hatalı — POST /api/auth/login","timestamp":"2026-02-28T14:37:15.295Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[33m401\u001b[0m 49.287 ms - 55\u001b[0m","timestamp":"2026-02-28T14:37:15.296Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.635 ms - 96\u001b[0m","timestamp":"2026-02-28T14:37:15.302Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.472 ms - 96\u001b[0m","timestamp":"2026-02-28T14:37:15.361Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.466 ms - 96\u001b[0m","timestamp":"2026-02-28T14:37:15.363Z"}
+{"level":"error","message":"Email gönderilemedi: connect ECONNREFUSED ::1:587","timestamp":"2026-02-28T14:37:22.598Z"}
+{"level":"error","message":"connect ECONNREFUSED ::1:587 — POST /api/auth/register","timestamp":"2026-02-28T14:37:22.599Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[31m500\u001b[0m 231.133 ms - 58\u001b[0m","timestamp":"2026-02-28T14:37:22.602Z"}
+{"level":"warn","message":"Bu email zaten kayıtlı — POST /api/auth/register","timestamp":"2026-02-28T14:37:25.331Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[33m400\u001b[0m 6.209 ms - 54\u001b[0m","timestamp":"2026-02-28T14:37:25.332Z"}
+{"level":"error","message":"Email gönderilemedi: connect ECONNREFUSED ::1:587","timestamp":"2026-02-28T14:37:32.603Z"}
+{"level":"error","message":"connect ECONNREFUSED ::1:587 — POST /api/auth/register","timestamp":"2026-02-28T14:37:32.604Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[31m500\u001b[0m 153.093 ms - 58\u001b[0m","timestamp":"2026-02-28T14:37:32.612Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.633 ms - 96\u001b[0m","timestamp":"2026-02-28T14:37:37.446Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 1.396 ms - 96\u001b[0m","timestamp":"2026-02-28T14:37:37.450Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 145.790 ms - 357\u001b[0m","timestamp":"2026-02-28T14:37:43.720Z"}
+{"level":"warn","message":"Kullanıcı bulunamadı — POST /api/auth/logout","timestamp":"2026-02-28T14:38:48.936Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/logout \u001b[33m401\u001b[0m 7.168 ms - 53\u001b[0m","timestamp":"2026-02-28T14:38:48.937Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.685 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:48.943Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.520 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:49.022Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.684 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:49.026Z"}
+{"level":"warn","message":"Email veya şifre hatalı — POST /api/auth/login","timestamp":"2026-02-28T14:38:52.732Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[33m401\u001b[0m 4.475 ms - 55\u001b[0m","timestamp":"2026-02-28T14:38:52.733Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.581 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:52.737Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.746 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:52.790Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.514 ms - 96\u001b[0m","timestamp":"2026-02-28T14:38:52.792Z"}
+{"level":"error","message":"Email gönderilemedi: connect ECONNREFUSED 127.0.0.1:587","timestamp":"2026-02-28T14:38:58.364Z"}
+{"level":"error","message":"connect ECONNREFUSED 127.0.0.1:587 — POST /api/auth/register","timestamp":"2026-02-28T14:38:58.364Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[31m500\u001b[0m 144.214 ms - 64\u001b[0m","timestamp":"2026-02-28T14:38:58.366Z"}

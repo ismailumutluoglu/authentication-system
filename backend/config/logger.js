@@ -1,30 +1,31 @@
-import nodemailer from 'nodemailer';
-import logger from './logger.js';
+import winston from 'winston';
 
-// Bir kere oluştur, her yerde kullan
-const transporter = nodemailer.createTransport({
-  host: process.env.EMAIL_HOST,
-  port: process.env.EMAIL_PORT,
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS,
-  },
+const { combine, timestamp, colorize, printf, json } = winston.format;
+
+const consoleFormat = printf(({ level, message, timestamp }) => {
+  return `${timestamp} [${level}]: ${message}`;
 });
 
-const sendEmail = async ({ to, subject, html }) => {
-  try {
-    await transporter.sendMail({
-      from: `"Auth System" <${process.env.EMAIL_USER}>`,
-      to,
-      subject,
-      html,
-    });
+const logger = winston.createLogger({
+  level: process.env.NODE_ENV === 'production' ? 'warn' : 'debug',
+  transports: [
+    new winston.transports.Console({
+      format: combine(
+        colorize(),
+        timestamp({ format: 'HH:mm:ss' }),
+        consoleFormat
+      ),
+    }),
+    new winston.transports.File({
+      filename: 'logs/error.log',
+      level: 'error',
+      format: combine(timestamp(), json()),
+    }),
+    new winston.transports.File({
+      filename: 'logs/combined.log',
+      format: combine(timestamp(), json()),
+    }),
+  ],
+});
 
-    logger.info(`Email gönderildi: ${to}`);
-  } catch (error) {
-    logger.error(`Email gönderilemedi: ${error.message}`);
-    throw error;
-  }
-};
-
-export default sendEmail;
+export default logger;
