@@ -6,7 +6,6 @@ import authRouter from './routes/authRoutes.js';
 dotenv.config();
 
 connectDB();
-
 const app = express();
 
 // --- MIDDLEWARE'LER ---
@@ -14,7 +13,6 @@ const app = express();
 app.use(express.json());
 // Gelen cookie'leri okuyabilmek için
 app.use(cookieParser());
-
 // --- ROUTES ---
 app.use('/api/v1/auth',authRouter);
 
