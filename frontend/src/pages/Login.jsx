@@ -81,7 +81,11 @@ const Login = () => {
             {loading ? 'Giriş yapılıyor...' : 'Giriş Yap'}
           </button>
         </form>
-
+        <p className="text-sm text-center text-gray-500 mt-6">
+  <Link to="/forgot-password" className="text-blue-600 font-medium hover:underline">
+    Şifremi Unuttum
+  </Link>
+</p>
         <p className="text-sm text-center text-gray-500 mt-6">
           Hesabın yok mu?{' '}
           <Link to="/register" className="text-blue-600 font-medium hover:underline">
