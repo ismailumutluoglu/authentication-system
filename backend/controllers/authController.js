@@ -4,7 +4,7 @@ import generateTokens from "../config/generateTokens.js";
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import sendEmail from '../config/sendEmail.js';
-import { verificationEmailTemplate } from '../config/emailTemplates.js';
+import { verificationEmailTemplate , passwordResetEmailTemplate } from "../config/emailTemplates.js";
 
 // ─────────────────────────────────────
 // REGISTER
@@ -225,6 +225,104 @@ export const verifyEmail = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Email başarıyla doğrulandı',
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ─────────────────────────────────────
+// FORGOT PASSWORD
+// ─────────────────────────────────────
+export const forgotPassword = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return next(new AppError('Email zorunludur', 400));
+    }
+
+    const user = await User.findOne({ email });
+
+    // Kullanıcı bulunamasa bile aynı mesajı dön
+    // → User enumeration engelleme
+    if (!user) {
+      return res.status(200).json({
+        success: true,
+        message: 'Şifre sıfırlama linki emailinize gönderildi',
+      });
+    }
+
+    // Token üret
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    user.passwordResetToken = resetToken;
+    user.passwordResetExpire = Date.now() + 60 * 60 * 1000; // 1 saat
+    await user.save();
+
+    // Email gönder
+    const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
+    await sendEmail({
+      to: user.email,
+      subject: 'Şifre Sıfırlama',
+      html: passwordResetEmailTemplate(user.username, resetUrl),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Şifre sıfırlama linki emailinize gönderildi',
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+// ─────────────────────────────────────
+// RESET PASSWORD
+// ─────────────────────────────────────
+export const resetPassword = async (req, res, next) => {
+  try {
+    const { token } = req.params;
+    const { password } = req.body;
+
+    if (!password) {
+      return next(new AppError('Yeni şifre zorunludur', 400));
+    }
+
+    if (password.length < 6) {
+      return next(new AppError('Şifre en az 6 karakter olmalıdır', 400));
+    }
+
+    // Token ile kullanıcıyı bul
+    const user = await User.findOne({
+      passwordResetToken: token,
+      passwordResetExpire: { $gt: Date.now() }, // süresi dolmamış mı?
+    }).select('+passwordResetToken +passwordResetExpire');
+
+    if (!user) {
+      return next(new AppError('Geçersiz veya süresi dolmuş şifre sıfırlama linki', 400));
+    }
+
+    // Şifreyi güncelle — pre('save') hook hash'leyecek
+    user.password = password;
+    user.passwordResetToken = undefined;
+    user.passwordResetExpire = undefined;
+
+    // Tüm oturumları kapat — güvenlik için
+    user.refreshToken = null;
+    await user.save();
+
+    // Cookie'yi temizle
+    res.clearCookie('refreshToken', {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Şifre başarıyla sıfırlandı, lütfen tekrar giriş yapın',
     });
 
   } catch (error) {

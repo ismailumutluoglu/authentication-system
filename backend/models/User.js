@@ -47,6 +47,14 @@ const userSchema = new mongoose.Schema(
     type: Date,
     select: false,
     },
+    passwordResetToken: {
+    type: String,
+    select: false,
+    },
+    passwordResetExpire: {
+    type: Date,
+    select: false,
+    },
   },
   {
     timestamps: true, // createdAt ve updatedAt otomatik eklenir

@@ -81,3 +81,14 @@
 {"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[33m404\u001b[0m 0.984 ms - 226\u001b[0m","timestamp":"2026-02-28T13:18:50.381Z"}
 {"level":"warn","message":"Geçersiz veya süresi dolmuş doğrulama linki — GET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe","timestamp":"2026-02-28T13:19:27.564Z"}
 {"level":"info","message":"\u001b[0mGET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[33m400\u001b[0m 3.473 ms - 77\u001b[0m","timestamp":"2026-02-28T13:19:27.567Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:26:06.722Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/forgot-password \u001b[32m200\u001b[0m 2672.197 ms - 76\u001b[0m","timestamp":"2026-02-28T13:26:06.730Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/reset-password/82ce550a24826bdb4d20b1161a75b3baf505a60e8766ea413eb466db173a77b4 \u001b[33m404\u001b[0m 2.835 ms - 227\u001b[0m","timestamp":"2026-02-28T13:26:17.120Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/reset-password/82ce550a24826bdb4d20b1161a75b3baf505a60e8766ea413eb466db173a77b4 \u001b[33m404\u001b[0m 1.752 ms - 227\u001b[0m","timestamp":"2026-02-28T13:26:25.959Z"}
+{"level":"error","message":"Cannot destructure property 'password' of 'req.body' as it is undefined. — POST /api/auth/reset-password/82ce550a24826bdb4d20b1161a75b3baf505a60e8766ea413eb466db173a77b4","timestamp":"2026-02-28T13:27:56.694Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/reset-password/82ce550a24826bdb4d20b1161a75b3baf505a60e8766ea413eb466db173a77b4 \u001b[31m500\u001b[0m 1.660 ms - 102\u001b[0m","timestamp":"2026-02-28T13:27:56.696Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/reset-password/82ce550a24826bdb4d20b1161a75b3baf505a60e8766ea413eb466db173a77b4 \u001b[32m200\u001b[0m 87.287 ms - 91\u001b[0m","timestamp":"2026-02-28T13:28:45.392Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 118.382 ms - 333\u001b[0m","timestamp":"2026-02-28T13:28:55.391Z"}
+{"level":"warn","message":"Email veya şifre hatalı — POST /api/auth/login","timestamp":"2026-02-28T13:29:14.141Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[33m401\u001b[0m 89.968 ms - 55\u001b[0m","timestamp":"2026-02-28T13:29:14.143Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 102.313 ms - 333\u001b[0m","timestamp":"2026-02-28T13:29:21.546Z"}
