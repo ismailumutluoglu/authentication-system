@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import api, { setAccessToken, getAccessToken } from '../api/axios';
+import api, { setAccessToken, getAccessToken } from '../api/axios.js';
 
 // ─────────────────────────────────────
 // 1. CONTEXT OLUŞTUR
