@@ -103,6 +103,7 @@ export const login = async (req, res, next) => {
         id: user._id,
         username: user.username,
         email: user.email,
+        isEmailVerified: user.isEmailVerified,
       },
     });
 
@@ -333,6 +334,37 @@ export const resetPassword = async (req, res, next) => {
     res.status(200).json({
       success: true,
       message: 'Şifre başarıyla sıfırlandı, lütfen tekrar giriş yapın',
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const resendVerification = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user.id)
+      .select('+emailVerificationToken +emailVerificationExpire');
+
+    if (user.isEmailVerified) {
+      return next(new AppError('Email zaten doğrulanmış', 400));
+    }
+
+    const verificationToken = crypto.randomBytes(32).toString('hex');
+    user.emailVerificationToken = verificationToken;
+    user.emailVerificationExpire = Date.now() + 24 * 60 * 60 * 1000;
+    await user.save();
+
+    const verificationUrl = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
+    await sendEmail({
+      to: user.email,
+      subject: 'Hesabınızı Doğrulayın',
+      html: verificationEmailTemplate(user.username, verificationUrl),
+    });
+
+    res.status(200).json({
+      success: true,
+      message: 'Doğrulama emaili tekrar gönderildi',
     });
 
   } catch (error) {

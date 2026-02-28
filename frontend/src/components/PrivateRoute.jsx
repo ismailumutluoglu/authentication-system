@@ -4,7 +4,6 @@ import { Navigate } from 'react-router-dom';
 const PrivateRoute = ({ children }) => {
   const { user, loading } = useAuth();
 
-  // Session restore henüz tamamlanmadı — bekle
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -13,12 +12,15 @@ const PrivateRoute = ({ children }) => {
     );
   }
 
-  // Kullanıcı giriş yapmamış — login'e yönlendir
   if (!user) {
     return <Navigate to="/login" replace />;
   }
 
-  // Kullanıcı giriş yapmış — sayfayı göster
+  // Email doğrulanmamış → bilgilendirme sayfasına yönlendir
+  if (!user.isEmailVerified) {
+    return <Navigate to="/verify-email-notice" replace />;
+  }
+
   return children;
 };
 
