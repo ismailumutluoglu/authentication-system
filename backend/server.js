@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import cors from 'cors' ; 
 import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRouter from './routes/authRoutes.js';
@@ -9,6 +10,10 @@ connectDB();
 
 const app = express();
 
+app.use(cors({
+  origin: 'http://localhost:5173',
+  credentials: true,
+}));
 // --- MIDDLEWARE'LER ---
 // Gelen JSON body'leri okuyabilmek için
 app.use(express.json());
@@ -16,7 +21,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 // --- ROUTES ---
-app.use('/api/v1/auth',authRouter);
+app.use('/api/auth',authRouter);
 
 // --- SUNUCUYU BAŞLAT ---
 const PORT = process.env.PORT || 5000;
