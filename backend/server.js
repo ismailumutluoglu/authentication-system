@@ -6,6 +6,7 @@ import connectDB from './config/db.js';
 import authRouter from './routes/authRoutes.js';
 import errorMiddleware from './middleware/errorMiddleware.js';
 import { generalLimiter } from './middleware/rateLimitMiddleware.js';
+import { mongoSanitizeMiddleware, xssSanitize } from './middleware/sanitizeMiddleware.js';
 dotenv.config();
 
 connectDB();
@@ -21,6 +22,8 @@ app.use(cors({
 app.use(express.json());
 // Gelen cookie'leri okuyabilmek için
 app.use(cookieParser());
+app.use(mongoSanitizeMiddleware); // ← NoSQL injection
+app.use(xssSanitize);            // ← XSS
 // ─── Genel limit — tüm /api route'larına ───
 app.use('/api', generalLimiter);
 // --- ROUTES ---
