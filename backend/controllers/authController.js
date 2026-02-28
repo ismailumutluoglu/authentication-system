@@ -4,7 +4,35 @@ import generateTokens from "../config/generateTokens.js";
 import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import sendEmail from '../config/sendEmail.js';
-import { verificationEmailTemplate , passwordResetEmailTemplate } from "../config/emailTemplates.js";
+import { verificationEmailTemplate, passwordResetEmailTemplate } from "../config/emailTemplates.js";
+
+// ─────────────────────────────────────
+// HELPERS
+// ─────────────────────────────────────
+const COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+  maxAge: 7 * 24 * 60 * 60 * 1000,
+};
+
+const CLEAR_COOKIE_OPTIONS = {
+  httpOnly: true,
+  secure: process.env.NODE_ENV === 'production',
+  sameSite: 'strict',
+};
+
+const sendVerificationEmail = async (user) => {
+  const token = crypto.randomBytes(32).toString('hex');
+  user.emailVerificationToken = token;
+  user.emailVerificationExpire = Date.now() + 24 * 60 * 60 * 1000;
+  const url = `${process.env.CLIENT_URL}/verify-email/${token}`;
+  await sendEmail({
+    to: user.email,
+    subject: 'Hesabınızı Doğrulayın',
+    html: verificationEmailTemplate(user.username, url),
+  });
+};
 
 // ─────────────────────────────────────
 // REGISTER
@@ -23,31 +51,13 @@ export const register = async (req, res, next) => {
     }
 
     const user = await User.create({ username, email, password });
-
-    // Email doğrulama token'ı üret
-    const verificationToken = crypto.randomBytes(32).toString('hex');
-    user.emailVerificationToken = verificationToken;
-    user.emailVerificationExpire = Date.now() + 24 * 60 * 60 * 1000; // 24 saat
-
     const { accessToken, refreshToken } = generateTokens(user._id);
     user.refreshToken = refreshToken;
+
+    await sendVerificationEmail(user);
     await user.save();
 
-    // Doğrulama emaili gönder
-    const verificationUrl = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
-    await sendEmail({
-      to: user.email,
-      subject: 'Hesabınızı Doğrulayın',
-      html: verificationEmailTemplate(user.username, verificationUrl),
-    });
-
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
+    res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS);
     res.status(201).json({
       message: 'Kayıt başarılı, lütfen emailinizi doğrulayın',
       accessToken,
@@ -89,13 +99,7 @@ export const login = async (req, res, next) => {
     user.refreshToken = refreshToken;
     await user.save();
 
-    res.cookie('refreshToken', refreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
+    res.cookie('refreshToken', refreshToken, COOKIE_OPTIONS);
     res.status(200).json({
       message: 'Giriş başarılı',
       accessToken,
@@ -113,17 +117,13 @@ export const login = async (req, res, next) => {
 };
 
 // ─────────────────────────────────────
-// GET PROFILE (Protected)
+// GET PROFILE
 // ─────────────────────────────────────
-export const getProfile = async (req, res, next) => {
-  try {
-    res.status(200).json({
-      message: 'Profile erişim başarılı',
-      user: req.user,
-    });
-  } catch (error) {
-    next(error);
-  }
+export const getProfile = (req, res) => {
+  res.status(200).json({
+    message: 'Profile erişim başarılı',
+    user: req.user,
+  });
 };
 
 // ─────────────────────────────────────
@@ -138,8 +138,8 @@ export const refreshAccessToken = async (req, res, next) => {
     }
 
     const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
-
     const user = await User.findById(decoded.id).select('+refreshToken');
+
     if (!user) {
       return next(new AppError('Kullanıcı bulunamadı', 401));
     }
@@ -149,24 +149,17 @@ export const refreshAccessToken = async (req, res, next) => {
     }
 
     const { accessToken, refreshToken: newRefreshToken } = generateTokens(user._id);
-
     user.refreshToken = newRefreshToken;
     await user.save();
 
-    res.cookie('refreshToken', newRefreshToken, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-      maxAge: 7 * 24 * 60 * 60 * 1000,
-    });
-
+    res.cookie('refreshToken', newRefreshToken, COOKIE_OPTIONS);
     res.status(200).json({
       message: 'Token yenilendi',
       accessToken,
     });
 
   } catch (error) {
-    next(error); // TokenExpiredError ve JsonWebTokenError errorMiddleware'de yakalanır
+    next(error);
   }
 };
 
@@ -178,31 +171,25 @@ export const logout = async (req, res, next) => {
     const token = req.cookies.refreshToken;
 
     if (!token) {
-      return res.status(200).json({
-        message: 'Zaten çıkış yapılmış'
-      });
+      return res.status(200).json({ message: 'Zaten çıkış yapılmış' });
     }
 
     await User.findOneAndUpdate(
       { refreshToken: token },
       { refreshToken: null }
-    ).select('+refreshToken');
+    );
 
-    res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    });
-
-    res.status(200).json({
-      message: 'Çıkış başarılı'
-    });
+    res.clearCookie('refreshToken', CLEAR_COOKIE_OPTIONS);
+    res.status(200).json({ message: 'Çıkış başarılı' });
 
   } catch (error) {
     next(error);
   }
 };
 
+// ─────────────────────────────────────
+// VERIFY EMAIL
+// ─────────────────────────────────────
 export const verifyEmail = async (req, res, next) => {
   try {
     const { token } = req.params;
@@ -215,15 +202,10 @@ export const verifyEmail = async (req, res, next) => {
       return next(new AppError('Geçersiz doğrulama linki', 400));
     }
 
-    // Zaten doğrulanmış mı?
     if (user.isEmailVerified) {
-      return res.status(200).json({
-        success: true,
-        message: 'Email zaten doğrulanmış',
-      });
+      return res.status(200).json({ success: true, message: 'Email zaten doğrulanmış' });
     }
 
-    // Süresi dolmuş mu?
     if (user.emailVerificationExpire < Date.now()) {
       return next(new AppError('Doğrulama linkinin süresi dolmuş', 400));
     }
@@ -233,10 +215,7 @@ export const verifyEmail = async (req, res, next) => {
     user.emailVerificationExpire = undefined;
     await user.save();
 
-    res.status(200).json({
-      success: true,
-      message: 'Email başarıyla doğrulandı',
-    });
+    res.status(200).json({ success: true, message: 'Email başarıyla doğrulandı' });
 
   } catch (error) {
     next(error);
@@ -255,9 +234,6 @@ export const forgotPassword = async (req, res, next) => {
     }
 
     const user = await User.findOne({ email });
-
-    // Kullanıcı bulunamasa bile aynı mesajı dön
-    // → User enumeration engelleme
     if (!user) {
       return res.status(200).json({
         success: true,
@@ -265,13 +241,11 @@ export const forgotPassword = async (req, res, next) => {
       });
     }
 
-    // Token üret
     const resetToken = crypto.randomBytes(32).toString('hex');
     user.passwordResetToken = resetToken;
-    user.passwordResetExpire = Date.now() + 60 * 60 * 1000; // 1 saat
+    user.passwordResetExpire = Date.now() + 60 * 60 * 1000;
     await user.save();
 
-    // Email gönder
     const resetUrl = `${process.env.CLIENT_URL}/reset-password/${resetToken}`;
     await sendEmail({
       to: user.email,
@@ -305,32 +279,22 @@ export const resetPassword = async (req, res, next) => {
       return next(new AppError('Şifre en az 6 karakter olmalıdır', 400));
     }
 
-    // Token ile kullanıcıyı bul
     const user = await User.findOne({
       passwordResetToken: token,
-      passwordResetExpire: { $gt: Date.now() }, // süresi dolmamış mı?
+      passwordResetExpire: { $gt: Date.now() },
     }).select('+passwordResetToken +passwordResetExpire');
 
     if (!user) {
       return next(new AppError('Geçersiz veya süresi dolmuş şifre sıfırlama linki', 400));
     }
 
-    // Şifreyi güncelle — pre('save') hook hash'leyecek
     user.password = password;
     user.passwordResetToken = undefined;
     user.passwordResetExpire = undefined;
-
-    // Tüm oturumları kapat — güvenlik için
     user.refreshToken = null;
     await user.save();
 
-    // Cookie'yi temizle
-    res.clearCookie('refreshToken', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'strict',
-    });
-
+    res.clearCookie('refreshToken', CLEAR_COOKIE_OPTIONS);
     res.status(200).json({
       success: true,
       message: 'Şifre başarıyla sıfırlandı, lütfen tekrar giriş yapın',
@@ -341,6 +305,9 @@ export const resetPassword = async (req, res, next) => {
   }
 };
 
+// ─────────────────────────────────────
+// RESEND VERIFICATION
+// ─────────────────────────────────────
 export const resendVerification = async (req, res, next) => {
   try {
     const user = await User.findById(req.user.id)
@@ -350,17 +317,8 @@ export const resendVerification = async (req, res, next) => {
       return next(new AppError('Email zaten doğrulanmış', 400));
     }
 
-    const verificationToken = crypto.randomBytes(32).toString('hex');
-    user.emailVerificationToken = verificationToken;
-    user.emailVerificationExpire = Date.now() + 24 * 60 * 60 * 1000;
+    await sendVerificationEmail(user);
     await user.save();
-
-    const verificationUrl = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
-    await sendEmail({
-      to: user.email,
-      subject: 'Hesabınızı Doğrulayın',
-      html: verificationEmailTemplate(user.username, verificationUrl),
-    });
 
     res.status(200).json({
       success: true,

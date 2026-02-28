@@ -1,5 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import api, { setAccessToken, getAccessToken } from '../api/axios.js';
+import api, { setAccessToken } from '../api/axios.js';
 
 // ─────────────────────────────────────
 // 1. CONTEXT OLUŞTUR
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
         const profileRes = await api.get('/auth/profile');
         setUser(profileRes.data.user);
 
-      } catch (error) {
+      } catch (_) {
         // Refresh token geçersiz veya yok — kullanıcı giriş yapmamış
         setUser(null);
         setAccessToken(null);

@@ -1,12 +1,13 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/User.js';
+import AppError from '../utils/AppError.js';
 
 export const protect = async (req, res, next) => {
   try {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith('Bearer ')) {
-      return res.status(401).json({ message: 'Yetkilendirme tokenı bulunamadı' });
+      return next(new AppError('Yetkilendirme tokenı bulunamadı', 401));
     }
 
     const token = authHeader.split(' ')[1];
@@ -14,29 +15,20 @@ export const protect = async (req, res, next) => {
 
     const user = await User.findById(decoded.id);
     if (!user) {
-      return res.status(401).json({ message: 'Kullanıcı bulunamadı' });
+      return next(new AppError('Kullanıcı bulunamadı', 401));
     }
 
     req.user = user;
     next();
 
   } catch (error) {
-    if (error.name === 'TokenExpiredError') {
-      return res.status(401).json({ message: 'Token süresi doldu' });
-    }
-    if (error.name === 'JsonWebTokenError') {
-      return res.status(401).json({ message: 'Geçersiz token' });
-    }
-    res.status(500).json({ message: 'Sunucu hatası' });
+    next(error); // TokenExpiredError ve JsonWebTokenError errorMiddleware'de yakalanır
   }
 };
 
 export const requireEmailVerified = (req, res, next) => {
   if (!req.user.isEmailVerified) {
-    return res.status(403).json({
-      success: false,
-      message: 'Lütfen önce email adresinizi doğrulayın'
-    });
+    return next(new AppError('Lütfen önce email adresinizi doğrulayın', 403));
   }
   next();
 };
