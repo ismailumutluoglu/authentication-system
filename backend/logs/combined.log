@@ -1,3 +1,83 @@
-{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 166.772 ms - 333\u001b[0m","timestamp":"2026-02-28T11:30:33.805Z"}
-{"level":"info","message":"Email gönderildi: test@gmail.com","timestamp":"2026-02-28T11:44:11.041Z"}
-{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2715.850 ms - 365\u001b[0m","timestamp":"2026-02-28T11:44:11.049Z"}
+{"level":"error","message":"Email gönderilemedi: Invalid login: 535 5.7.0 Invalid credentials","timestamp":"2026-02-28T12:52:48.675Z"}
+{"level":"error","message":"Invalid login: 535 5.7.0 Invalid credentials — POST /api/auth/register","timestamp":"2026-02-28T12:52:48.676Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[31m500\u001b[0m 2741.401 ms - 74\u001b[0m","timestamp":"2026-02-28T12:52:48.682Z"}
+{"level":"warn","message":"Bu email zaten kayıtlı — POST /api/auth/register","timestamp":"2026-02-28T13:05:36.064Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[33m400\u001b[0m 53.015 ms - 54\u001b[0m","timestamp":"2026-02-28T13:05:36.069Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:05:46.132Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2697.273 ms - 390\u001b[0m","timestamp":"2026-02-28T13:05:46.133Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email \u001b[33m404\u001b[0m 2.406 ms - 161\u001b[0m","timestamp":"2026-02-28T13:06:13.275Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m404\u001b[0m 0.731 ms - 226\u001b[0m","timestamp":"2026-02-28T13:06:28.147Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m404\u001b[0m 0.422 ms - 226\u001b[0m","timestamp":"2026-02-28T13:06:35.590Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m404\u001b[0m 0.677 ms - 226\u001b[0m","timestamp":"2026-02-28T13:06:46.902Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[32m200\u001b[0m 9.120 ms - 59\u001b[0m","timestamp":"2026-02-28T13:07:09.535Z"}
+{"level":"warn","message":"Geçersiz veya süresi dolmuş doğrulama linki — GET /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5","timestamp":"2026-02-28T13:07:19.897Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m400\u001b[0m 3.369 ms - 77\u001b[0m","timestamp":"2026-02-28T13:07:19.899Z"}
+{"level":"warn","message":"Geçersiz veya süresi dolmuş doğrulama linki — GET /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5","timestamp":"2026-02-28T13:07:22.558Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m400\u001b[0m 2.831 ms - 77\u001b[0m","timestamp":"2026-02-28T13:07:22.559Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m404\u001b[0m 0.312 ms - 226\u001b[0m","timestamp":"2026-02-28T13:07:26.973Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/a9b36e570fdca7de5c6239dcffcc1c557c333e1bb9f6c2ac0c4e3c43d98438c5 \u001b[33m404\u001b[0m 0.269 ms - 226\u001b[0m","timestamp":"2026-02-28T13:07:39.276Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:14:00.803Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2783.050 ms - 390\u001b[0m","timestamp":"2026-02-28T13:14:00.809Z"}
+{"level":"info","message":"\u001b[0mGET /verify-email/e18e9c465039906b48a1a64538edd4803c5f9cd97bdf027a5077248df3aeb136 \u001b[33m404\u001b[0m 2.649 ms - 216\u001b[0m","timestamp":"2026-02-28T13:14:17.487Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:14:46.855Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2607.785 ms - 390\u001b[0m","timestamp":"2026-02-28T13:14:46.862Z"}
+{"level":"info","message":"\u001b[0mGET /verify-email/62efa3ffa26616622f2ebbb18efe25c84c852180908ebbd4143929b3b45750f5 \u001b[33m404\u001b[0m 3.249 ms - 216\u001b[0m","timestamp":"2026-02-28T13:14:57.449Z"}
+{"level":"info","message":"\u001b[0mGET /verify-email/62efa3ffa26616622f2ebbb18efe25c84c852180908ebbd4143929b3b45750f5 \u001b[33m404\u001b[0m 0.635 ms - 216\u001b[0m","timestamp":"2026-02-28T13:15:09.938Z"}
+{"level":"info","message":"\u001b[0mGET /verify-email/62efa3ffa26616622f2ebbb18efe25c84c852180908ebbd4143929b3b45750f5 \u001b[33m404\u001b[0m 0.327 ms - 216\u001b[0m","timestamp":"2026-02-28T13:15:12.684Z"}
+{"level":"info","message":"\u001b[0mGET / \u001b[33m404\u001b[0m 0.295 ms - 139\u001b[0m","timestamp":"2026-02-28T13:15:40.692Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:16:04.180Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2645.438 ms - 390\u001b[0m","timestamp":"2026-02-28T13:16:04.185Z"}
+{"level":"info","message":"Email gönderildi: ismailumutluoglu10@gmail.com","timestamp":"2026-02-28T13:16:58.090Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/register \u001b[32m201\u001b[0m 2523.292 ms - 390\u001b[0m","timestamp":"2026-02-28T13:16:58.099Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[32m200\u001b[0m 16.348 ms - 59\u001b[0m","timestamp":"2026-02-28T13:17:03.882Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.324Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 1.380 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.325Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.326Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.590 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.326Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.331Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.676 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.332Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.337Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 3.319 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.339Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.384Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 2.050 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.386Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.392Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 1.502 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.394Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.395Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.802 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.396Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.403Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.772 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.403Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.404Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.681 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.405Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.407Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.814 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.408Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.410Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.695 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.410Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.412Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.756 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.413Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.413Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.404 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.414Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.416Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.551 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.417Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.417Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.457 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.418Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.421Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.593 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.421Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.422Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.449 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.423Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.425Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.516 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.425Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.426Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.576 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.426Z"}
+{"level":"warn","message":"Refresh token bulunamadı — POST /api/auth/refresh","timestamp":"2026-02-28T13:17:29.428Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m401\u001b[0m 0.503 ms - 55\u001b[0m","timestamp":"2026-02-28T13:17:29.429Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.324 ms - 96\u001b[0m","timestamp":"2026-02-28T13:17:29.430Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.318 ms - 96\u001b[0m","timestamp":"2026-02-28T13:17:29.433Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.910 ms - 96\u001b[0m","timestamp":"2026-02-28T13:17:29.828Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/refresh \u001b[33m429\u001b[0m 0.302 ms - 96\u001b[0m","timestamp":"2026-02-28T13:17:29.829Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/login \u001b[32m200\u001b[0m 140.023 ms - 333\u001b[0m","timestamp":"2026-02-28T13:17:38.565Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/logout \u001b[32m200\u001b[0m 14.770 ms - 35\u001b[0m","timestamp":"2026-02-28T13:17:40.627Z"}
+{"level":"warn","message":"Geçersiz veya süresi dolmuş doğrulama linki — GET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe","timestamp":"2026-02-28T13:18:40.297Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[33m400\u001b[0m 4.848 ms - 77\u001b[0m","timestamp":"2026-02-28T13:18:40.299Z"}
+{"level":"info","message":"\u001b[0mPOST /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[33m404\u001b[0m 0.984 ms - 226\u001b[0m","timestamp":"2026-02-28T13:18:50.381Z"}
+{"level":"warn","message":"Geçersiz veya süresi dolmuş doğrulama linki — GET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe","timestamp":"2026-02-28T13:19:27.564Z"}
+{"level":"info","message":"\u001b[0mGET /api/auth/verify-email/b92666674503586e3f4da5a5cae382b753abc10742080cde11366f7201402cbe \u001b[33m400\u001b[0m 3.473 ms - 77\u001b[0m","timestamp":"2026-02-28T13:19:27.567Z"}

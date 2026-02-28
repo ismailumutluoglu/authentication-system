@@ -1,0 +1,2 @@
+{"level":"error","message":"Email gönderilemedi: Invalid login: 535 5.7.0 Invalid credentials","timestamp":"2026-02-28T12:52:48.675Z"}
+{"level":"error","message":"Invalid login: 535 5.7.0 Invalid credentials — POST /api/auth/register","timestamp":"2026-02-28T12:52:48.676Z"}
