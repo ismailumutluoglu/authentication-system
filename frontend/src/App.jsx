@@ -4,7 +4,7 @@ import PrivateRoute from './components/PrivateRoute';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-
+import VerifyEmail from './pages/VerifyEmail';
 function App() {
   return (
     <BrowserRouter>
@@ -12,7 +12,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-
+          <Route path="/verify-email/:token" element={<VerifyEmail />} />
           {/* Protected Route */}
           <Route
             path="/dashboard"

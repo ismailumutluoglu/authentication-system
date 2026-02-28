@@ -206,17 +206,27 @@ export const verifyEmail = async (req, res, next) => {
   try {
     const { token } = req.params;
 
-    // Token ile kullanıcıyı bul
     const user = await User.findOne({
       emailVerificationToken: token,
-      emailVerificationExpire: { $gt: Date.now() }, // süresi dolmamış mı?
     }).select('+emailVerificationToken +emailVerificationExpire');
 
     if (!user) {
-      return next(new AppError('Geçersiz veya süresi dolmuş doğrulama linki', 400));
+      return next(new AppError('Geçersiz doğrulama linki', 400));
     }
 
-    // Hesabı aktif et, token'ları temizle
+    // Zaten doğrulanmış mı?
+    if (user.isEmailVerified) {
+      return res.status(200).json({
+        success: true,
+        message: 'Email zaten doğrulanmış',
+      });
+    }
+
+    // Süresi dolmuş mu?
+    if (user.emailVerificationExpire < Date.now()) {
+      return next(new AppError('Doğrulama linkinin süresi dolmuş', 400));
+    }
+
     user.isEmailVerified = true;
     user.emailVerificationToken = undefined;
     user.emailVerificationExpire = undefined;
