@@ -5,6 +5,7 @@ import cookieParser from 'cookie-parser';
 import connectDB from './config/db.js';
 import authRouter from './routes/authRoutes.js';
 import errorMiddleware from './middleware/errorMiddleware.js';
+import { generalLimiter } from './middleware/rateLimitMiddleware.js';
 dotenv.config();
 
 connectDB();
@@ -20,7 +21,8 @@ app.use(cors({
 app.use(express.json());
 // Gelen cookie'leri okuyabilmek için
 app.use(cookieParser());
-
+// ─── Genel limit — tüm /api route'larına ───
+app.use('/api', generalLimiter);
 // --- ROUTES ---
 app.use('/api/auth',authRouter);
 app.use(errorMiddleware);
