@@ -7,6 +7,8 @@ import authRouter from './routes/authRoutes.js';
 import errorMiddleware from './middleware/errorMiddleware.js';
 import { generalLimiter } from './middleware/rateLimitMiddleware.js';
 import { mongoSanitizeMiddleware, xssSanitize } from './middleware/sanitizeMiddleware.js';
+import morgan from 'morgan';
+import logger from './config/logger.js';
 dotenv.config();
 
 connectDB();
@@ -16,6 +18,12 @@ const app = express();
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true,
+}));
+// ─── HTTP Logger ───
+app.use(morgan('dev', {
+  stream: {
+    write: (message) => logger.info(message.trim())
+  }
 }));
 // --- MIDDLEWARE'LER ---
 // Gelen JSON body'leri okuyabilmek için

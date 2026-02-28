@@ -1,19 +1,25 @@
-const errorMiddleware = (err, req, res, next) => {
+import logger from '../config/logger.js';
 
-  // Default değerler
+const errorMiddleware = (err, req, res, next) => {
   let statusCode = err.statusCode || 500;
   let message = err.message || 'Sunucu hatası';
 
-  // Mongoose duplicate key hatası (unique: true ihlali)
-  // Örnek: aynı email ile tekrar kayıt
+  // 500 hatalarını logla — bunlar beklenmeyen hatalar
+  if (statusCode === 500) {
+    logger.error(`${err.message} — ${req.method} ${req.originalUrl}`);
+  }
+
+  // 400/401 hatalarını warn olarak logla
+  if (statusCode === 400 || statusCode === 401) {
+    logger.warn(`${message} — ${req.method} ${req.originalUrl}`);
+  }
+
   if (err.code === 11000) {
     statusCode = 400;
     const field = Object.keys(err.keyValue)[0];
     message = `Bu ${field} zaten kullanımda`;
   }
 
-  // Mongoose validation hatası
-  // Örnek: minlength ihlali, required alan boş
   if (err.name === 'ValidationError') {
     statusCode = 400;
     message = Object.values(err.errors)
@@ -21,7 +27,6 @@ const errorMiddleware = (err, req, res, next) => {
       .join(', ');
   }
 
-  // JWT hataları
   if (err.name === 'JsonWebTokenError') {
     statusCode = 401;
     message = 'Geçersiz token';
@@ -35,7 +40,6 @@ const errorMiddleware = (err, req, res, next) => {
   res.status(statusCode).json({
     success: false,
     message,
-    // Sadece development'ta stack trace göster
     ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
 };
